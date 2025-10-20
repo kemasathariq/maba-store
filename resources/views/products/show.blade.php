@@ -2,7 +2,7 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="bg-white rounded-lg shadow-xl overflow-hidden md:flex">
             <div class="md:w-1/2">
-                <img src="https://placehold.co/800x600/E2E8F0/333333?text={{ urlencode($product->name) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
             </div>
 
             <div class="p-8 md:w-1/2 flex flex-col justify-center">

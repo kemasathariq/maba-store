@@ -14,30 +14,27 @@
             <!-- Scripts -->
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         </head>
-        <body class="font-sans antialiased bg-gray-100">
-            <div class="min-h-screen">
+        <body class="font-sans antialiased bg-yellow-50">
+            <div class="min-h-screen bg-yellow-50">
                 <!-- Bagian Navbar -->
-                <nav class="bg-white shadow-sm border-b border-gray-100">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="flex justify-between h-16">
-                            <!-- Logo dan Link Utama -->
-                            <div class="flex">
-                                <!-- Logo -->
-                                <div class="shrink-0 flex items-center">
-                                    <a href="/" class="text-xl font-bold text-gray-800">
-                                        MABA STORE
-                                    </a>
-                                </div>
-                                <!-- Link Navigasi -->
-                                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                    <a href="/" class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900">
-                                        Products
-                                    </a>
-                                    <a href="{{ route('cart.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300">
-                                        Cart
-                                    </a>
-                                </div>
-                            </div>
+                <nav class="relative h-16 shadow-sm border-b border-gray-100 bg-cover bg-center">
+                <div class="relative w-full h-full">
+                    {{-- Background --}}
+                    <img src="{{ asset('images/Navbar.svg') }}" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" alt="Navbar Background">
+                    <div class="absolute inset-0 bg-black/25"></div> {{-- overlay opsional --}}
+
+                {{-- Konten Navbar --}}
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+                <!-- Logo dan Link -->
+                <div class="flex">
+                    <div class="shrink-0 flex items-center">
+                        <a href="/" class="text-xl font-bold text-white">MABA STORE</a>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <a href="/" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('home') ? 'border-indigo-400' : 'border-transparent' }} text-sm font-medium leading-5 text-white">Products</a>
+                        <a href="{{ route('cart.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('cart.index') ? 'border-indigo-400' : 'border-transparent' }} text-sm font-medium leading-5 text-white hover:text-gray-200 hover:border-gray-300">Cart</a>
+                    </div>
+                </div>
 
                             <!-- Tombol Login/Register atau Menu Pengguna -->
                             <div class="hidden sm:flex sm:items-center sm:ml-6">

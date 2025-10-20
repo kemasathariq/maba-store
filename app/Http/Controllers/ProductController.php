@@ -10,21 +10,62 @@ namespace App\Http\Controllers;
         /**
          * Display a listing of the resource.
          */
-        public function index()
-        {
+            public function index(){
             $products = Product::all();
+
+            // Daftar gambar sesuai urutan ID atau nama produk
+            $images = [
+                'Calculus I Textbook' => 'Kalkulus_1.svg',
+                'Calculus II Textbook' => 'Kalkulus_2.svg',
+                'Official Campus Belt' => 'Belt.svg',
+                'Official Training Book' => 'Buku_Ospek.svg',
+                'Formal Black Trousers' => 'Celana.svg',
+                'University Tie' => 'Dasi.svg',
+                'Physics: Mechanics Textbook' => 'Fismek.svg',
+                'Plain White Shirt' => 'Kemeja.svg',
+                'A3 Poster Paper' => 'KertasA3.png',
+                'Red Ribbon for Nametag' => 'Pita.png',
+            ];
+
+            // Tambahkan properti "image" ke setiap produk
+            foreach ($products as $product) {
+                $name = $product->name;
+
+                if (isset($images[$name])) {
+                    $product->image = $images[$name];
+                } else {
+                    $product->image = 'default.svg'; // fallback kalau tidak ditemukan
+                }
+            }
+
             return view('welcome', ['products' => $products]);
         }
+
 
         /**
          * Menampilkan halaman detail untuk satu produk.
          */
         public function show(Product $product)
         {
-            // Laravel akan secara otomatis menemukan produk dari database
-            // berdasarkan ID di URL (misal: /products/1)
-            // dan menyimpannya di variabel $product.
-            // Kita lalu mengirimkan variabel $product itu ke view.
+            // Mapping nama produk ke nama file gambar
+            $images = [
+                'Calculus I Textbook' => 'Kalkulus_1.svg',
+                'Calculus II Textbook' => 'Kalkulus_2.svg',
+                'Official Campus Belt' => 'Belt.svg',
+                'Official Training Book' => 'Buku_Ospek.svg',
+                'Formal Black Trousers' => 'Celana.svg',
+                'University Tie' => 'Dasi.svg',
+                'Physics: Mechanics Textbook' => 'Fismek.svg',
+                'Plain White Shirt' => 'Kemeja.svg',
+                'A3 Poster Paper' => 'KertasA3.png',
+                'Red Ribbon for Nametag' => 'Pita.png',
+            ];
+            $name = $product->name;
+            if (isset($images[$name])) {
+                $product->image = $images[$name];
+            } else {
+                $product->image = 'default.svg';
+            }
             return view('products.show', ['product' => $product]);
         }
     }
