@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
 // --- Rute untuk Pengguna Publik & Pelanggan ---
 Route::get('/', [ProductController::class, 'index'])->name('home');
@@ -22,13 +23,17 @@ Route::middleware('auth')->group(function () {
     // Routes untuk Keranjang Belanja
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
-    Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
 });
 
 // --- Grup Route untuk Admin ---
 Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
-    // Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+    Route::get('/', function () {
+        return redirect()->route('admin.products.index');
+    })->name('dashboard');
+    
+    Route::resource('products', AdminProductController::class);
 });
+
 
 require __DIR__.'/auth.php';

@@ -19,6 +19,10 @@
 
                 <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-8">
                     @csrf
+                    <div class="flex items-center mb-4">
+                        <label for="quantity" class="mr-4 font-semibold text-gray-700">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1" class="w-20 rounded border-gray-300 text-center">
+                    </div>
                     <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         Add to Cart
                     </button>

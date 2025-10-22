@@ -33,6 +33,7 @@
                                 <td class="p-4 text-center">
                                     <form action="{{ route('cart.remove', $id) }}" method="POST">
                                         @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:text-red-700 font-semibold">Remove</button>
                                     </form>
                                 </td>
