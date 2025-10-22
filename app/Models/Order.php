@@ -8,10 +8,12 @@ namespace App\Models;
     class Order extends Model
     {
         use HasFactory;
+        protected $fillable = [
+            'user_id',
+            'total',
+            'status',
+        ];
 
-        /**
-         * An order belongs to a single user.
-         */
         public function user()
         {
             return $this->belongsTo(User::class);

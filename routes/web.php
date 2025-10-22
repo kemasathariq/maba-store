@@ -5,6 +5,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\OrderController;
 
 // --- Rute untuk Pengguna Publik & Pelanggan ---
 Route::get('/', [ProductController::class, 'index'])->name('home');
@@ -24,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
     Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('cart/checkout', [OrderController::class, 'store'])->name('cart.checkout');
 });
 
 // --- Grup Route untuk Admin ---
@@ -33,6 +36,7 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
     })->name('dashboard');
     
     Route::resource('products', AdminProductController::class);
+    Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
 });
 
 
