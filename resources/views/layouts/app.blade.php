@@ -5,7 +5,10 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta name="csrf-token" content="{{ csrf_token() }}">
 
-            <title>{{ config('app.name', 'MABA STORE') }}</title>
+            <title>Maba Store</title>
+
+            <!-- Favicon -->
+            <link rel="icon" href="{{ asset('images/ITS.svg') }}" type="image/png">
 
             <!-- Fonts -->
             <link rel="preconnect" href="https://fonts.bunny.net">
@@ -13,6 +16,12 @@
 
             <!-- Scripts -->
             @vite(['resources/css/app.css', 'resources/js/app.js'])
+            <!-- Hide development toolbar -->
+            <style>
+                #vite-dev-overlay {
+                    display: none !important;
+                }
+            </style>
         </head>
         <body class="font-sans antialiased bg-yellow-50">
             <div class="min-h-screen bg-yellow-50">
@@ -21,7 +30,7 @@
                 <div class="relative w-full h-full">
                     {{-- Background --}}
                     <img src="{{ asset('images/Navbar.svg') }}" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" alt="Navbar Background">
-                    <div class="absolute inset-0 bg-black/25"></div> {{-- overlay opsional --}}
+                    <div class="absolute inset-0 border-gray-100"></div> {{-- overlay opsional --}}
 
                 {{-- Konten Navbar --}}
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
@@ -64,8 +73,12 @@
                                     </x-dropdown>
                                 @else
                                     <!-- Jika Pengguna Belum Login (Tamu) -->
-                                    <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
-                                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                                    <span class="inline-block px-3 py-1 rounded-md border border-blue-900 bg-blue-900 hover:bg-blue-800 hover:border-blue-800">
+                                        <a href="{{ route('login') }}" class="text-sm text-white">Log in</a>
+                                    </span>
+                                    <span class="ml-4 inline-block px-3 py-1 rounded-md border border-blue-900 bg-blue-900 hover:bg-blue-800 hover:border-blue-800">
+                                        <a href="{{ route('register') }}" class="text-sm text-white">Register</a>
+                                    </span>
                                 @endauth
                             </div>
                         </div>

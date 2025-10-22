@@ -36,7 +36,10 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
     })->name('dashboard');
     
     Route::resource('products', AdminProductController::class);
-    Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::resource('orders', AdminOrderController::class);
+    Route::get('/dashboard', function() {
+        return view('admin.dashboard');
+    })->name('dashboard');
 });
 
 

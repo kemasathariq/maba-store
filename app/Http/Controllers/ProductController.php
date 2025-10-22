@@ -27,10 +27,16 @@ namespace App\Http\Controllers;
                 'Red Ribbon for Nametag' => 'Pita.png',
             ];
 
-            // Tambahkan properti "image" ke setiap produk
+            // Tambahkan properti "image" ke setiap produk.
+            // Prioritaskan field `image` yang mungkin sudah disimpan di database
             foreach ($products as $product) {
-                $name = $product->name;
+                // jika kolom image di database diisi (dari upload), gunakan itu
+                if (!empty($product->image)) {
+                    continue;
+                }
 
+                // jika tidak ada, fallback ke mapping berdasarkan nama
+                $name = $product->name;
                 if (isset($images[$name])) {
                     $product->image = $images[$name];
                 } else {

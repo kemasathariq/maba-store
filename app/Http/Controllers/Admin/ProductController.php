@@ -27,7 +27,7 @@ namespace App\Http\Controllers\Admin;
             $request->validate([
                 'name' => 'required|string|max:255',
                 'description' => 'required|string',
-                'price' => 'required|numeric|min:0',
+                'price' => 'required|numeric|min:0|max:99999999.99',
             ]);
 
             Product::create($request->all());
