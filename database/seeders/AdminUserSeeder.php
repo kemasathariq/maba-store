@@ -3,19 +3,22 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class AdminUserSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        User::updateOrCreate(
-            ['email' => 'admin@example.com'],
+        DB::table('users')->updateOrInsert(
+            ['email' => 'admin@mabastore.com'], // cek apakah sudah ada
             [
                 'name' => 'Admin',
-                'password' => Hash::make('12345678'), // change to secure password
-                'is_admin' => true
+                'email_verified_at' => now(),
+                'password' => Hash::make('admin123'), // ubah sesuai keinginan
+                'is_admin' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         );
     }
